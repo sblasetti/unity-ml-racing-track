@@ -9,3 +9,4 @@ Sample project using ML-Agents to complete a racing track
 ## Information
 
 - [ML-Agents getting started](https://github.com/Unity-Technologies/ml-agents/blob/release_12_docs/docs/Getting-Started.md)
+- [Create a learning environment](https://github.com/Unity-Technologies/ml-agents/blob/release_12_docs/docs/Learning-Environment-Create-New.md)
