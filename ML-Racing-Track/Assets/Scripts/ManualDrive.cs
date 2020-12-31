@@ -9,7 +9,7 @@ public class ManualDrive : MonoBehaviour
     float vertical;
     float horizontal;
 
-    float speed = 4f;
+    float speed = 8f;
     Vector3 rotationRight = new Vector3(0, 60, 0);
     Vector3 rotationLeft = new Vector3(0, -60, 0);
 
