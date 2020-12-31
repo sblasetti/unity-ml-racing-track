@@ -4,38 +4,66 @@ using UnityEngine;
 
 public class ManualDrive : MonoBehaviour
 {
-    Rigidbody rb;
+    public GameObject FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
+    public float MotorForce = 100;
+    public float SteerForce = 40;
+    public float BrakeForce = 100;
 
+    WheelCollider frontLeftCollider, frontRightCollider, rearLeftCollider, rearRightCollider;
     float vertical;
     float horizontal;
+    bool brake;
 
-    float speed = 8f;
-    Vector3 rotationRight = new Vector3(0, 60, 0);
-    Vector3 rotationLeft = new Vector3(0, -60, 0);
-
-    void Start()
+    private void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
-    }
+        frontLeftCollider = FrontLeftWheel.GetComponent<WheelCollider>();
+        frontRightCollider = FrontRightWheel.GetComponent<WheelCollider>();
+        rearLeftCollider = RearLeftWheel.GetComponent<WheelCollider>();
+        rearRightCollider = RearRightWheel.GetComponent<WheelCollider>();
+}
 
     void Update()
     {
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
+        brake = Input.GetKey(KeyCode.Space);
     }
 
     private void FixedUpdate()
     {
-        if (vertical != 0)
-        {
-            rb.MovePosition(transform.position + transform.forward * vertical * speed * Time.deltaTime);
+        ApplyForce();
+        Rotate();
+    }
 
-            if (horizontal != 0)
-            {
-                var rotation = horizontal > 0 ? rotationRight : rotationLeft;
-                var deltaRotation = Quaternion.Euler(rotation * Time.deltaTime);
-                rb.MoveRotation(rb.rotation * deltaRotation);
-            }
-        }
+    private void Rotate()
+    {
+        RotateWheel(horizontal, frontLeftCollider, FrontLeftWheel);
+        RotateWheel(horizontal, frontRightCollider, FrontRightWheel);
+    }
+
+    private void ApplyForce()
+    {
+        ApplyWheelForce(vertical, rearLeftCollider);
+        ApplyWheelForce(vertical, rearRightCollider);
+    }
+
+    private void ApplyWheelForce(float verticalChange, WheelCollider collider)
+    {
+        var torque = verticalChange * MotorForce;
+        collider.motorTorque = torque;
+
+        collider.brakeTorque = brake ? BrakeForce : 0;
+    }
+
+    private void RotateWheel(float change, WheelCollider collider, GameObject wheel)
+    {
+        var steerAngle = change * SteerForce;
+        collider.steerAngle = steerAngle;
+
+        // Visual rotation
+        Quaternion rotation;
+        collider.GetWorldPose(out _, out rotation);
+        var fixedRotation = Quaternion.Euler(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z + 90);
+        wheel.transform.rotation = fixedRotation;
     }
 }
