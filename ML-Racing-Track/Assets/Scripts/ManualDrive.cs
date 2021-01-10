@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class ManualDrive : MonoBehaviour
 {
-    public GameObject FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
-    public float MotorForce = 100;
-    public float SteerForce = 40;
-    public float BrakeForce = 100;
+    public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
+    public WheelCollider FrontLeftWheelCollider, FrontRightWheelCollider, RearLeftWheelCollider, RearRightWheelCollider;
+    public float MotorForce = 50;
+    public float MaxSteerAngle = 40;
+    public float BrakeForce = 50;
 
-    WheelCollider frontLeftCollider, frontRightCollider, rearLeftCollider, rearRightCollider;
+    public Vector3 centerOfMass = Vector3.zero;
+
     float vertical;
     float horizontal;
     bool brake;
 
     private void Start()
     {
-        frontLeftCollider = FrontLeftWheel.GetComponent<WheelCollider>();
-        frontRightCollider = FrontRightWheel.GetComponent<WheelCollider>();
-        rearLeftCollider = RearLeftWheel.GetComponent<WheelCollider>();
-        rearRightCollider = RearRightWheel.GetComponent<WheelCollider>();
-}
+        GetComponentInChildren<Rigidbody>().centerOfMass = centerOfMass;
+    }
 
     void Update()
     {
+        GetInput();
+    }
+
+    private void GetInput()
+    {
+
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
         brake = Input.GetKey(KeyCode.Space);
@@ -31,39 +36,51 @@ public class ManualDrive : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyForce();
-        Rotate();
+        Accelerate();
+        Steer();
+        UpdateWheelPose();
     }
 
-    private void Rotate()
+    private void Steer()
     {
-        RotateWheel(horizontal, frontLeftCollider, FrontLeftWheel);
-        RotateWheel(horizontal, frontRightCollider, FrontRightWheel);
+        RotateWheel(horizontal, FrontLeftWheelCollider);
+        RotateWheel(horizontal, FrontRightWheelCollider);
     }
 
-    private void ApplyForce()
+    private void Accelerate()
     {
-        ApplyWheelForce(vertical, rearLeftCollider);
-        ApplyWheelForce(vertical, rearRightCollider);
+        ApplyWheelForce(vertical, FrontLeftWheelCollider);
+        ApplyWheelForce(vertical, FrontRightWheelCollider);
+    }
+
+    private void UpdateWheelPose()
+    {
+        SetWheelPoseFromCollider(FrontRightWheelCollider, FrontRightWheel);
+        SetWheelPoseFromCollider(FrontLeftWheelCollider, FrontLeftWheel);
+        SetWheelPoseFromCollider(RearRightWheelCollider, RearRightWheel);
+        SetWheelPoseFromCollider(RearLeftWheelCollider, RearLeftWheel);
     }
 
     private void ApplyWheelForce(float verticalChange, WheelCollider collider)
     {
         var torque = verticalChange * MotorForce;
-        collider.motorTorque = torque;
-
+        collider.motorTorque = brake ? 0 : torque;
         collider.brakeTorque = brake ? BrakeForce : 0;
     }
 
-    private void RotateWheel(float change, WheelCollider collider, GameObject wheel)
+    private void RotateWheel(float horizontalChange, WheelCollider collider)
     {
-        var steerAngle = change * SteerForce;
+        var steerAngle = horizontalChange * MaxSteerAngle;
         collider.steerAngle = steerAngle;
+    }
 
-        // Visual rotation
+    private void SetWheelPoseFromCollider(WheelCollider collider, Transform wheelTransform)
+    {
+        Vector3 position;
         Quaternion rotation;
-        collider.GetWorldPose(out _, out rotation);
-        var fixedRotation = Quaternion.Euler(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z + 90);
-        wheel.transform.rotation = fixedRotation;
+
+        collider.GetWorldPose(out position, out rotation);
+        wheelTransform.position = position;
+        wheelTransform.rotation = rotation;
     }
 }

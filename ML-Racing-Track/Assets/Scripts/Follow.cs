@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    public GameObject Target;
-    float frontOffset = -3f;
-    float topOffset = 1f;
+    public Transform Target;
+    public Vector3 Offset;
+    public float followSpeed = 10;
+    public float lookSpeed = 10;
 
-    void Update()
+    void FixedUpdate()
     {
-        var offset = Target.transform.forward * frontOffset + Target.transform.up * topOffset;
-        transform.position = Target.transform.position + offset;
-        transform.rotation = Quaternion.LookRotation(Target.transform.forward);
+        LookAtTarget();
+        MoveToTarget();
+    }
+
+    void LookAtTarget()
+    {
+        var direction = Target.position - transform.position;
+        var rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, lookSpeed * Time.deltaTime);
+    }
+
+    void MoveToTarget()
+    {
+        var position = Target.position +
+                       Target.forward * Offset.z +
+                       Target.right * Offset.x +
+                       Target.up * Offset.y;
+        transform.position = Vector3.Lerp(transform.position, position, followSpeed * Time.deltaTime);
     }
 }

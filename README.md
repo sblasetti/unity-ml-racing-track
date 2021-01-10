@@ -14,5 +14,12 @@ Sample project using ML-Agents to complete a racing track
 
 ## Lectures
 
+### ML
+
 - [NN usage in Colin McRae's Rally 2](http://www.ai-junkie.com/misc/hannan/hannan.html)
-- [How to build car movement in Unity](https://www.youtube.com/watch?v=kvTuYziy_QE)
+
+### Unity
+
+- [Car movement in Unity with Wheel Colliders](https://www.youtube.com/watch?v=j6_SMdWeGFI)
+- [ML Agents in car movememt](https://unitylist.com/p/xha/Unity-ML-Agent-Car-prototype)
+
