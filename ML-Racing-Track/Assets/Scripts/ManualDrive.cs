@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ManualDrive : MonoBehaviour
 {
+    public GameObject Vehicle;
     public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel, CenterOfMass;
     public WheelCollider FrontLeftWheelCollider, FrontRightWheelCollider, RearLeftWheelCollider, RearRightWheelCollider;
     public float MotorForce = 50;
@@ -37,6 +38,20 @@ public class ManualDrive : MonoBehaviour
         Accelerate();
         Steer();
         UpdateWheelPose();
+
+        DrawRaycasts();
+    }
+
+    private void DrawRaycasts()
+    {
+        if (Vehicle == null) return;
+
+        var length = 3f;
+        Debug.DrawRay(Vehicle.transform.position, -Vehicle.transform.right * length, Color.blue);
+        Debug.DrawRay(Vehicle.transform.position, (Vehicle.transform.forward - Vehicle.transform.right) * length, Color.blue);
+        Debug.DrawRay(Vehicle.transform.position, Vehicle.transform.forward * length, Color.blue);
+        Debug.DrawRay(Vehicle.transform.position, (Vehicle.transform.forward + Vehicle.transform.right) * length, Color.blue);
+        Debug.DrawRay(Vehicle.transform.position, Vehicle.transform.right * length, Color.blue);
     }
 
     private void Steer()

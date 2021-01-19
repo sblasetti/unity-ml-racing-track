@@ -1,6 +1,6 @@
 # unity-ml-racing-track
 
-Sample project using ML-Agents to complete a racing track
+Sample project using Unity ML-Agents in an autopilot racing car.
 
 ## Environment setup
 
@@ -22,4 +22,3 @@ Sample project using ML-Agents to complete a racing track
 
 - [Car movement in Unity with Wheel Colliders](https://www.youtube.com/watch?v=j6_SMdWeGFI)
 - [ML Agents in car movememt](https://unitylist.com/p/xha/Unity-ML-Agent-Car-prototype)
-
