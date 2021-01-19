@@ -11,23 +11,17 @@ public class Follow : MonoBehaviour
 
     void FixedUpdate()
     {
-        LookAtTarget();
-        MoveToTarget();
-    }
-
-    void LookAtTarget()
-    {
-        var direction = Target.position - transform.position;
-        var rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, lookSpeed * Time.deltaTime);
-    }
-
-    void MoveToTarget()
-    {
-        var position = Target.position +
+        var targetPosition = Target.position +
                        Target.forward * Offset.z +
                        Target.right * Offset.x +
                        Target.up * Offset.y;
-        transform.position = Vector3.Lerp(transform.position, position, followSpeed * Time.deltaTime);
+        var direction = Target.position - targetPosition;
+        var targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        // Move To Target
+        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+
+        // Look At Target
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lookSpeed * Time.deltaTime);
     }
 }

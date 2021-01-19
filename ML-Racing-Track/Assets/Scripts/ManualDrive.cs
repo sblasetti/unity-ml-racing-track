@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class ManualDrive : MonoBehaviour
 {
-    public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel;
+    public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel, CenterOfMass;
     public WheelCollider FrontLeftWheelCollider, FrontRightWheelCollider, RearLeftWheelCollider, RearRightWheelCollider;
     public float MotorForce = 50;
     public float MaxSteerAngle = 40;
     public float BrakeForce = 50;
-
-    public Vector3 centerOfMass = Vector3.zero;
 
     float vertical;
     float horizontal;
@@ -18,7 +16,7 @@ public class ManualDrive : MonoBehaviour
 
     private void Start()
     {
-        GetComponentInChildren<Rigidbody>().centerOfMass = centerOfMass;
+        GetComponentInChildren<Rigidbody>().centerOfMass = CenterOfMass.transform.localPosition;
     }
 
     void Update()
@@ -64,7 +62,7 @@ public class ManualDrive : MonoBehaviour
     private void ApplyWheelForce(float verticalChange, WheelCollider collider)
     {
         var torque = verticalChange * MotorForce;
-        collider.motorTorque = brake ? 0 : torque;
+        collider.motorTorque = !brake ? torque : 0;
         collider.brakeTorque = brake ? BrakeForce : 0;
     }
 
