@@ -203,6 +203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: track002
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 414306d11a1fb7644b53c4356afd4802,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 414306d11a1fb7644b53c4356afd4802, type: 3}
 --- !u!1 &59080431
@@ -318,6 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 65451647}
   - component: {fileID: 65451648}
+  - component: {fileID: 65451649}
   m_Layer: 0
   m_Name: Checkpoint 14
   m_TagString: Untagged
@@ -352,6 +358,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &65451649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65451646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 14
 --- !u!1 &121576589
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 121576590}
+  - component: {fileID: 121576591}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -383,6 +403,18 @@ Transform:
   m_Father: {fileID: 147095981}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &121576591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121576589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00ae488ad7339e408c2bd743a5e4d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &127320830
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 127320831}
   - component: {fileID: 127320832}
+  - component: {fileID: 127320833}
   m_Layer: 0
   m_Name: Checkpoint 09
   m_TagString: Untagged
@@ -427,6 +460,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &127320833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127320830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 9
 --- !u!1 &144744315
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +485,7 @@ GameObject:
   - component: {fileID: 144744319}
   - component: {fileID: 144744318}
   - component: {fileID: 144744317}
+  - component: {fileID: 144744320}
   m_Layer: 0
   m_Name: StartLine
   m_TagString: Untagged
@@ -520,6 +567,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144744315}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &144744320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144744315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 0
 --- !u!1 &147095980
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 147095981}
+  - component: {fileID: 147095982}
   m_Layer: 0
   m_Name: Circuit
   m_TagString: Untagged
@@ -552,6 +613,18 @@ Transform:
   m_Father: {fileID: 59080432}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &147095982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147095980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00ae488ad7339e408c2bd743a5e4d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &151405353 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 414306d11a1fb7644b53c4356afd4802,
@@ -618,6 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 218152373}
   - component: {fileID: 218152374}
+  - component: {fileID: 218152375}
   m_Layer: 0
   m_Name: Checkpoint 02
   m_TagString: Untagged
@@ -652,6 +726,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &218152375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218152372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 2
 --- !u!1 &241993636
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309411951}
   - component: {fileID: 309411952}
+  - component: {fileID: 309411953}
   m_Layer: 0
   m_Name: Checkpoint 11
   m_TagString: Untagged
@@ -790,6 +878,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &309411953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309411950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 11
 --- !u!1 &337721504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 687780778}
   - component: {fileID: 687780779}
+  - component: {fileID: 687780780}
   m_Layer: 0
   m_Name: Checkpoint 07
   m_TagString: Untagged
@@ -1235,6 +1337,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &687780780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687780777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 7
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894318990}
   - component: {fileID: 894318991}
+  - component: {fileID: 894318992}
   m_Layer: 0
   m_Name: Checkpoint 01
   m_TagString: Untagged
@@ -1436,6 +1552,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &894318992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894318989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 1
 --- !u!1 &898660415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,6 +1605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906494614}
+  - component: {fileID: 906494615}
   m_Layer: 0
   m_Name: Checkpoints
   m_TagString: Untagged
@@ -1512,6 +1642,19 @@ Transform:
   m_Father: {fileID: 147095981}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &906494615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906494613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b83b8b416acf584dab3b450f9fc1b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfCheckpoints: []
 --- !u!1 &907988010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 913971425}
   - component: {fileID: 913971426}
+  - component: {fileID: 913971427}
   m_Layer: 0
   m_Name: Checkpoint 13
   m_TagString: Untagged
@@ -1587,6 +1731,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &913971427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913971424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 13
 --- !u!1001 &949312562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1666,6 +1823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1018004907}
   - component: {fileID: 1018004908}
+  - component: {fileID: 1018004909}
   m_Layer: 0
   m_Name: Checkpoint 10
   m_TagString: Untagged
@@ -1700,6 +1858,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1018004909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018004906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 10
 --- !u!1 &1050630630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,6 +1881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1050630631}
   - component: {fileID: 1050630632}
+  - component: {fileID: 1050630633}
   m_Layer: 0
   m_Name: Checkpoint 12
   m_TagString: Untagged
@@ -1744,6 +1916,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1050630633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050630630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 12
 --- !u!4 &1125599422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7086591806041110755, guid: 253252973dcd21b4696b7b5be97b4c47,
@@ -1821,6 +2006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1185302804}
   - component: {fileID: 1185302806}
+  - component: {fileID: 1185302807}
   - component: {fileID: 1185302805}
   m_Layer: 0
   m_Name: Vehicle
@@ -1876,6 +2062,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8222253, y: 0.5648179, z: 1.2081923}
   m_Center: {x: 0.0011544228, y: -0.04929614, z: 0.103807926}
+--- !u!114 &1185302807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185302803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f6e5f7417328047803662780291eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1248705582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1930,6 +2128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1315337828}
   - component: {fileID: 1315337829}
+  - component: {fileID: 1315337830}
   m_Layer: 0
   m_Name: Checkpoint 05
   m_TagString: Untagged
@@ -1964,6 +2163,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1315337830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315337827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 5
 --- !u!1 &1338702086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,6 +2217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1388829383}
   - component: {fileID: 1388829384}
+  - component: {fileID: 1388829385}
   m_Layer: 0
   m_Name: Checkpoint 04
   m_TagString: Untagged
@@ -2039,6 +2252,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1388829385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388829382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 4
 --- !u!4 &1388911172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7086591806041110755, guid: 253252973dcd21b4696b7b5be97b4c47,
@@ -2054,8 +2280,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1441749940}
-  - component: {fileID: 1441749941}
+  - component: {fileID: 1441749942}
   - component: {fileID: 1441749943}
+  - component: {fileID: 1441749941}
+  - component: {fileID: 1441749945}
+  - component: {fileID: 1441749944}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2086,7 +2315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441749939}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3ff050c0612f434b85f676effb41c48, type: 3}
   m_Name: 
@@ -2095,8 +2324,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  StartLine: {fileID: 144744315}
---- !u!114 &1441749943
+--- !u!114 &1441749942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2105,7 +2333,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1441749939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89c1a065699f5f43917b8e22e4cb68f, type: 3}
+  m_Script: {fileID: 11500000, guid: 720f765d33145d3479f465b588b755a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle: {fileID: 1185302803}
@@ -2120,7 +2348,57 @@ MonoBehaviour:
   RearRightWheelCollider: {fileID: 1183963370}
   MotorForce: 350
   MaxSteerAngle: 20
-  BrakeForce: 700
+  BrakeForce: 800
+--- !u!114 &1441749943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441749939}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89c1a065699f5f43917b8e22e4cb68f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1441749944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441749939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 5
+    NumStackedVectorObservations: 1
+    VectorActionSize: 03000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: Autopilot
+  TeamId: 0
+  m_UseChildSensors: 1
+--- !u!114 &1441749945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441749939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 10
+  TakeActionsBetweenDecisions: 1
 --- !u!4 &1442521424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7086591806041110755, guid: 253252973dcd21b4696b7b5be97b4c47,
@@ -2143,6 +2421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1658028579}
   - component: {fileID: 1658028580}
+  - component: {fileID: 1658028581}
   m_Layer: 0
   m_Name: Checkpoint 08
   m_TagString: Untagged
@@ -2177,6 +2456,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1658028581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658028578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 8
 --- !u!1 &1748957035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061882554}
   - component: {fileID: 2061882555}
+  - component: {fileID: 2061882556}
   m_Layer: 0
   m_Name: Checkpoint 06
   m_TagString: Untagged
@@ -2316,6 +2609,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2061882556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061882553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 6
 --- !u!1 &2072083760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,6 +2632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2072083761}
   - component: {fileID: 2072083762}
+  - component: {fileID: 2072083763}
   m_Layer: 0
   m_Name: Checkpoint 03
   m_TagString: Untagged
@@ -2360,6 +2667,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2072083763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072083760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbcedab25287694c80db3fccec2f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Order: 3
 --- !u!4 &2082768600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7086591806041110755, guid: 253252973dcd21b4696b7b5be97b4c47,

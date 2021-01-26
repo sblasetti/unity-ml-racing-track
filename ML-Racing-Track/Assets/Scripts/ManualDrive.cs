@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class ManualDrive : MonoBehaviour
 {
-    public GameObject Vehicle;
-    public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel, CenterOfMass;
-    public WheelCollider FrontLeftWheelCollider, FrontRightWheelCollider, RearLeftWheelCollider, RearRightWheelCollider;
-    public float MotorForce = 50;
-    public float MaxSteerAngle = 40;
-    public float BrakeForce = 50;
+    Driver driver;
 
     float vertical;
     float horizontal;
@@ -17,7 +12,7 @@ public class ManualDrive : MonoBehaviour
 
     private void Start()
     {
-        GetComponentInChildren<Rigidbody>().centerOfMass = CenterOfMass.transform.localPosition;
+        driver = GetComponent<Driver>();
     }
 
     void Update()
@@ -35,65 +30,6 @@ public class ManualDrive : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Accelerate();
-        Steer();
-        UpdateWheelPose();
-
-        DrawRaycasts();
-    }
-
-    private void DrawRaycasts()
-    {
-        if (Vehicle == null) return;
-
-        var length = 3f;
-        Debug.DrawRay(Vehicle.transform.position, -Vehicle.transform.right * length, Color.blue);
-        Debug.DrawRay(Vehicle.transform.position, (Vehicle.transform.forward - Vehicle.transform.right) * length, Color.blue);
-        Debug.DrawRay(Vehicle.transform.position, Vehicle.transform.forward * length, Color.blue);
-        Debug.DrawRay(Vehicle.transform.position, (Vehicle.transform.forward + Vehicle.transform.right) * length, Color.blue);
-        Debug.DrawRay(Vehicle.transform.position, Vehicle.transform.right * length, Color.blue);
-    }
-
-    private void Steer()
-    {
-        RotateWheel(horizontal, FrontLeftWheelCollider);
-        RotateWheel(horizontal, FrontRightWheelCollider);
-    }
-
-    private void Accelerate()
-    {
-        ApplyWheelForce(vertical, FrontLeftWheelCollider);
-        ApplyWheelForce(vertical, FrontRightWheelCollider);
-    }
-
-    private void UpdateWheelPose()
-    {
-        SetWheelPoseFromCollider(FrontRightWheelCollider, FrontRightWheel);
-        SetWheelPoseFromCollider(FrontLeftWheelCollider, FrontLeftWheel);
-        SetWheelPoseFromCollider(RearRightWheelCollider, RearRightWheel);
-        SetWheelPoseFromCollider(RearLeftWheelCollider, RearLeftWheel);
-    }
-
-    private void ApplyWheelForce(float verticalChange, WheelCollider collider)
-    {
-        var torque = verticalChange * MotorForce;
-        collider.motorTorque = !brake ? torque : 0;
-        collider.brakeTorque = brake ? BrakeForce : 0;
-    }
-
-    private void RotateWheel(float horizontalChange, WheelCollider collider)
-    {
-        var steerAngle = horizontalChange * MaxSteerAngle;
-        collider.steerAngle = steerAngle;
-    }
-
-    private void SetWheelPoseFromCollider(WheelCollider collider, Transform wheelTransform)
-    {
-        Vector3 position;
-        Quaternion rotation;
-
-        collider.GetWorldPose(out position, out rotation);
-        wheelTransform.position = position;
-        wheelTransform.rotation = rotation;
+        driver.Drive(horizontal, vertical, brake);
     }
 }
