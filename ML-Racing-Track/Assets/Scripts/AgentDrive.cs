@@ -13,9 +13,12 @@ public class AgentDrive : Agent
     Checkpoint lastCheckpoint;
     Checkpoint nextCheckpoint;
 
+    Vector3 initialPosition = new Vector3(6f, 0.35f, 26f);
+    Quaternion initialRotation = Quaternion.Euler(0, 90, 0);
+
     void Start()
     {
-        rb = GetComponentInChildren<Vehicle>().GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         driver = GetComponent<Driver>();
 
         driver.OnCheckpointEntered += OnCheckpointEnteredHandler;
@@ -34,7 +37,14 @@ public class AgentDrive : Agent
     {
         Debug.Log("BEGIN");
 
-        checkpoints = FindObjectOfType<CheckpointsContainer>().listOfCheckpoints;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+
+        if (checkpoints == null)
+        {
+            checkpoints = FindObjectOfType<CheckpointsContainer>().listOfCheckpoints;
+        }
+
         nextCheckpoint = checkpoints.First();
         lastCheckpoint = null;
 

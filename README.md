@@ -23,7 +23,14 @@ Sample project using Unity ML-Agents in an autopilot racing car.
 - [Car movement in Unity with Wheel Colliders](https://www.youtube.com/watch?v=j6_SMdWeGFI)
 - [ML Agents in car movement](https://unitylist.com/p/xha/Unity-ML-Agent-Car-prototype)
 - [Autonomous car parking](https://medium.com/xrpractices/autonomous-car-parking-using-ml-agents-d780a366fe46)
+- [Ignore collitions while training?](https://gamedev.stackexchange.com/questions/75782/how-to-ignore-collision-between-two-objects)
 
 ### Geometry
 
 - [Dot vector applications in games](https://hackernoon.com/applications-of-the-vector-dot-product-for-game-programming-12443ac91f16)
+
+2. Train the model
+
+- Activate the virtual environment in the repo root folder
+- Run `mlagents-learn config/autopilot_config.yaml --run-id=Autopilot --force`. After the script starts it will ask you to run the project in Unity.
+- Press `Play` in Unity

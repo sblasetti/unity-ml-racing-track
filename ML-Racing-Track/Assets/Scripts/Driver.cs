@@ -2,7 +2,6 @@
 
 public class Driver : MonoBehaviour
 {
-    public GameObject Vehicle;
     public Transform FrontLeftWheel, FrontRightWheel, RearLeftWheel, RearRightWheel, CenterOfMass;
     public WheelCollider FrontLeftWheelCollider, FrontRightWheelCollider, RearLeftWheelCollider, RearRightWheelCollider;
     public float MotorForce = 50;
