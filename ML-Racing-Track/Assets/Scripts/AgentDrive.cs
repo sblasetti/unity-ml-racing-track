@@ -18,13 +18,26 @@ public class AgentDrive : Agent
         rb = GetComponentInChildren<Vehicle>().GetComponent<Rigidbody>();
         driver = GetComponent<Driver>();
 
-        checkpoints = FindObjectOfType<CheckpointsContainer>().listOfCheckpoints;
-        nextCheckpoint = checkpoints.First();
-        lastCheckpoint = null;
+        driver.OnCheckpointEntered += OnCheckpointEnteredHandler;
+    }
+
+    private void OnCheckpointEnteredHandler(Checkpoint checkpoint)
+    {
+        if (checkpoint == nextCheckpoint)
+        {
+            lastCheckpoint = nextCheckpoint;
+            nextCheckpoint = checkpoints.FirstOrDefault(x => x.Order == nextCheckpoint.Order + 1);
+        }
     }
 
     public override void OnEpisodeBegin()
     {
+        Debug.Log("BEGIN");
+
+        checkpoints = FindObjectOfType<CheckpointsContainer>().listOfCheckpoints;
+        nextCheckpoint = checkpoints.First();
+        lastCheckpoint = null;
+
         if (PlayerIsOffTheTrack())
         {
             CancelPlayerVelocity();
@@ -35,17 +48,29 @@ public class AgentDrive : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Player's position
-        sensor.AddObservation(transform.localPosition);
+        sensor.AddObservation(transform.position.normalized);
 
         // Player's velocity
-        sensor.AddObservation(rb.velocity.x);
-        sensor.AddObservation(rb.velocity.z);
+        sensor.AddObservation(rb.velocity.normalized);
+
+        // Next checkpoint position
+        sensor.AddObservation(transform.InverseTransformPoint(nextCheckpoint.transform.position));
+
+        // Player direction
+        sensor.AddObservation(transform.forward);
+        sensor.AddObservation(transform.right);
+
+        // Player direction to next checkpoint
+        var directionToNextCheckpoint = (nextCheckpoint.transform.position - transform.position).normalized;
+        sensor.AddObservation(directionToNextCheckpoint);
+
+        Debug.DrawLine(transform.position, nextCheckpoint.transform.position, Color.blue);
 
         // Player radar (raycast)
 
         // Checkpoints
-        sensor.AddObservation(lastCheckpoint);
-        sensor.AddObservation(nextCheckpoint);
+        //sensor.AddObservation(lastCheckpoint != null ? lastCheckpoint.Order : -1);
+        //sensor.AddObservation(nextCheckpoint.Order);
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -66,18 +91,17 @@ public class AgentDrive : Agent
     {
         var horizontal = vectorAction[0];
         var vertical = vectorAction[1];
-        var brake = vectorAction[2] != 0;
+        var brake = vectorAction[2] < 0;
 
         driver.Drive(horizontal, vertical, brake);
     }
 
     private void SetPlayerRewards()
     {
-        // Set reward if moving forward 
-        if (rb.velocity.x > 0 || rb.velocity.z > 0)
-        {
-            SetReward(0.1f);
-        }
+        // Set reward if moving in the right direction
+        var directionToNextCheckpoint = (nextCheckpoint.transform.position - transform.position);
+        var velocityAlignment = Vector3.Dot(directionToNextCheckpoint, rb.velocity);
+        SetReward(0.001f * velocityAlignment);
 
         // Set reward depending on track checkpoints
         // TBD
@@ -95,6 +119,7 @@ public class AgentDrive : Agent
         // End episode when player falls off the track
         if (PlayerIsOffTheTrack())
         {
+            Debug.Log("EEEEEEEND");
             EndEpisode();
         }
     }

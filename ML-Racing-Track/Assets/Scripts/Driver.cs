@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
@@ -11,9 +9,29 @@ public class Driver : MonoBehaviour
     public float MaxSteerAngle = 40;
     public float BrakeForce = 50;
 
+    public delegate void CheckpointEntered(Checkpoint checkpoint);
+    public CheckpointEntered OnCheckpointEntered;
+
     private void Start()
     {
         GetComponentInChildren<Rigidbody>().centerOfMass = CenterOfMass.transform.localPosition;
+    }
+
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collider");
+        if (OnCheckpointEntered != null)
+        {
+            Debug.Log("get checkpoint");
+            var checkpoint = other.GetComponent<Checkpoint>();
+            if (checkpoint != null)
+            {
+                Debug.Log("propagate");
+                OnCheckpointEntered(checkpoint);
+            }
+        }
     }
 
     public void Drive(float horizontal, float vertical, bool brake)

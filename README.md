@@ -21,4 +21,9 @@ Sample project using Unity ML-Agents in an autopilot racing car.
 ### Unity
 
 - [Car movement in Unity with Wheel Colliders](https://www.youtube.com/watch?v=j6_SMdWeGFI)
-- [ML Agents in car movememt](https://unitylist.com/p/xha/Unity-ML-Agent-Car-prototype)
+- [ML Agents in car movement](https://unitylist.com/p/xha/Unity-ML-Agent-Car-prototype)
+- [Autonomous car parking](https://medium.com/xrpractices/autonomous-car-parking-using-ml-agents-d780a366fe46)
+
+### Geometry
+
+- [Dot vector applications in games](https://hackernoon.com/applications-of-the-vector-dot-product-for-game-programming-12443ac91f16)
