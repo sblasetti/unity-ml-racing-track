@@ -20,14 +20,11 @@ public class Driver : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collider");
         if (OnCheckpointEntered != null)
         {
-            Debug.Log("get checkpoint");
             var checkpoint = other.GetComponent<Checkpoint>();
             if (checkpoint != null)
             {
-                Debug.Log("propagate");
                 OnCheckpointEntered(checkpoint);
             }
         }

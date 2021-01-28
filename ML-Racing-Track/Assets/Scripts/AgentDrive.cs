@@ -30,13 +30,15 @@ public class AgentDrive : Agent
         {
             lastCheckpoint = nextCheckpoint;
             nextCheckpoint = checkpoints.FirstOrDefault(x => x.Order == nextCheckpoint.Order + 1);
+            if (nextCheckpoint == null)
+            {
+                nextCheckpoint = checkpoints.First();
+            }
         }
     }
 
     public override void OnEpisodeBegin()
     {
-        Debug.Log("BEGIN");
-
         transform.position = initialPosition;
         transform.rotation = initialRotation;
 
@@ -73,8 +75,6 @@ public class AgentDrive : Agent
         // Player direction to next checkpoint
         var directionToNextCheckpoint = (nextCheckpoint.transform.position - transform.position).normalized;
         sensor.AddObservation(directionToNextCheckpoint);
-
-        Debug.DrawLine(transform.position, nextCheckpoint.transform.position, Color.blue);
 
         // Player radar (raycast)
 
@@ -129,7 +129,6 @@ public class AgentDrive : Agent
         // End episode when player falls off the track
         if (PlayerIsOffTheTrack())
         {
-            Debug.Log("EEEEEEEND");
             EndEpisode();
         }
     }
