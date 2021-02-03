@@ -28,10 +28,11 @@ Sample project using Unity ML-Agents in an autopilot racing car.
 
 ## Lectures
 
-### ML
+### ML-Agents
 
-- [How to read graphs in TensorBoard?](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Using-Tensorboard.md)
-- [NN usage in Colin McRae's Rally 2](http://www.ai-junkie.com/misc/hannan/hannan.html)
+- [How to read TensorBoard?](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Using-Tensorboard.md)
+- [How to read TensorBoard? II](https://medium.com/aureliantactics/understanding-ppo-plots-in-tensorboard-cbc3199b9ba2)
+- [Configuration file in ML-Agents](https://cursos.uadla.com/curso/curso-intermedio-de-ml-agents/lecciones/la-importancia-del-fichero-yaml/)
 
 ### Unity
 
@@ -43,3 +44,7 @@ Sample project using Unity ML-Agents in an autopilot racing car.
 ### Geometry
 
 - [Dot vector applications in games](https://hackernoon.com/applications-of-the-vector-dot-product-for-game-programming-12443ac91f16)
+
+### ML in gaming
+
+- [NN usage in Colin McRae's Rally 2](http://www.ai-junkie.com/misc/hannan/hannan.html)
