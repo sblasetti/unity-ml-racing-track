@@ -2,6 +2,8 @@
 
 Sample project using Unity ML-Agents in an autopilot racing car.
 
+Check the project diary [here](./docs/history.md).
+
 ## Environment setup
 
 1. Install Unity ML-Agents and dependencies (steps [here](https://github.com/Unity-Technologies/ml-agents/blob/release_12_docs/docs/Installation.md)).

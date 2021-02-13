@@ -6,15 +6,19 @@ using UnityEngine;
 
 public class AgentDrive : Agent
 {
+    private const float MAX_RAY_DISTANCE = 5f;
     Rigidbody rb;
     Driver driver;
 
     List<Checkpoint> checkpoints;
     Checkpoint lastCheckpoint;
     Checkpoint nextCheckpoint;
+    int checkpointsCount = 0;
 
     Vector3 initialPosition = new Vector3(6f, 0.35f, 26f);
     Quaternion initialRotation = Quaternion.Euler(0, 90, 0);
+
+    public bool AllowManualControl = false;
 
     void Start()
     {
@@ -34,6 +38,7 @@ public class AgentDrive : Agent
             {
                 nextCheckpoint = checkpoints.First();
             }
+            checkpointsCount++;
         }
     }
 
@@ -41,6 +46,7 @@ public class AgentDrive : Agent
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
+        checkpointsCount = 0;
 
         if (checkpoints == null)
         {
@@ -77,10 +83,24 @@ public class AgentDrive : Agent
         sensor.AddObservation(directionToNextCheckpoint);
 
         // Player radar (raycast)
+        sensor.AddObservation(GetDistanceFrom(-45));
+        sensor.AddObservation(GetDistanceFrom(-22.5f));
+        sensor.AddObservation(GetDistanceFrom(0));
+        sensor.AddObservation(GetDistanceFrom(22.5f));
+        sensor.AddObservation(GetDistanceFrom(45));
+    }
 
-        // Checkpoints
-        //sensor.AddObservation(lastCheckpoint != null ? lastCheckpoint.Order : -1);
-        //sensor.AddObservation(nextCheckpoint.Order);
+    private float GetDistanceFrom(float angleFromAgentForward)
+    {
+        RaycastHit hitInfo;
+        var ray = new Ray
+        {
+            origin = rb.transform.position,
+            direction = Quaternion.Euler(0, angleFromAgentForward, 0) * rb.transform.forward.normalized
+        };
+        Physics.Raycast(ray, out hitInfo, MAX_RAY_DISTANCE, 1 << 10);
+        //Debug.Log($"angle: {angleFromAgentForward} \tdist: {hitInfo.distance}\t {hitInfo.collider}");
+        return hitInfo.distance >= 0 ? hitInfo.distance / MAX_RAY_DISTANCE : 1f;
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -92,9 +112,12 @@ public class AgentDrive : Agent
 
     public override void Heuristic(float[] actionsOut)
     {
-        actionsOut[0] = Input.GetAxis("Horizontal");
-        actionsOut[1] = Input.GetAxis("Vertical");
-        actionsOut[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
+        if (AllowManualControl)
+        {
+            actionsOut[0] = Input.GetAxis("Horizontal");
+            actionsOut[1] = Input.GetAxis("Vertical");
+            actionsOut[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
+        }
     }
 
     private void UpdatePlayerMovement(float[] vectorAction)
@@ -113,8 +136,11 @@ public class AgentDrive : Agent
         var velocityAlignment = Vector3.Dot(directionToNextCheckpoint, rb.velocity);
         SetReward(0.001f * velocityAlignment);
 
-        // Set reward depending on track checkpoints
-        // TBD
+        // Set reward depending on completed checkpoints
+        SetReward(0.03f * checkpointsCount);
+
+        // Set reward for moving forward
+        SetReward(rb.velocity.normalized.x > 0 ? rb.velocity.normalized.x * .01f : 0);
 
         // Set reward when finish line is reached
         if (lastCheckpoint == checkpoints.Last())
