@@ -2,6 +2,10 @@
 
 Sample project using Unity ML-Agents in an autopilot racing car.
 
+<img src="./docs/images/000-track.png" alt="Track" width="600"/>
+
+## Project history
+
 Check the project diary [here](./docs/history.md).
 
 ## Environment setup
