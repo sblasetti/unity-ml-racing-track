@@ -31,3 +31,23 @@ The agents look lost, will try updating the algorithm onfiguration.
 ![Track limits](./images/003-track-limits.png)
 
 ![Agents with track limit](./images/003-limits.gif)
+
+## Iteration 4
+
+Updated agents to use RayPerceptionSensor components.
+
+Tried different ways to reward/penalize until found a configuration that makes the agents complete the lap.
+
+![Full lap with raycasting](./images/004-full-lap1.gif)
+
+![Full lap with raycasting](./images/004-full-lap3.gif)
+
+### Rewards are calculated as follows
+
+- Local velocity: the Z component of the agent's local velocity is used. The greater its value, the greater the reward. If the agent is going in reverse the Z component is negative and the agent gets penalized (negative reward).
+
+- Direction angle to checkpoint: first the angle between the agent direction (forward) and the position of the next checkpoint is calculated, then a function is used to get a reward/penalization depending on how large the angle is.
+
+![Direction angle](./images/004-direction-angle.png)
+
+![Reward graph](./images/004-reward-graph.png)

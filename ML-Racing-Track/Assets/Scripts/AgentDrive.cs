@@ -6,14 +6,12 @@ using UnityEngine;
 
 public class AgentDrive : Agent
 {
-    private const float MAX_RAY_DISTANCE = 5f;
+    private const float DIRECTION_ANGLE_LIMIT_PERCENTAGE = 0.75f;
     Rigidbody rb;
     Driver driver;
 
     List<Checkpoint> checkpoints;
-    Checkpoint lastCheckpoint;
     Checkpoint nextCheckpoint;
-    int checkpointsCount = 0;
 
     Vector3 initialPosition = new Vector3(6f, 0.35f, 26f);
     Quaternion initialRotation = Quaternion.Euler(0, 90, 0);
@@ -32,21 +30,18 @@ public class AgentDrive : Agent
     {
         if (checkpoint == nextCheckpoint)
         {
-            lastCheckpoint = nextCheckpoint;
             nextCheckpoint = checkpoints.FirstOrDefault(x => x.Order == nextCheckpoint.Order + 1);
             if (nextCheckpoint == null)
             {
                 nextCheckpoint = checkpoints.First();
             }
-            checkpointsCount++;
         }
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.position = initialPosition;
+        transform.position = GetInitialPosition();
         transform.rotation = initialRotation;
-        checkpointsCount = 0;
 
         if (checkpoints == null)
         {
@@ -54,13 +49,19 @@ public class AgentDrive : Agent
         }
 
         nextCheckpoint = checkpoints.First();
-        lastCheckpoint = null;
 
         if (PlayerIsOffTheTrack())
         {
             CancelPlayerVelocity();
             ResetPlayerStartPosition();
         }
+    }
+
+    private Vector3 GetInitialPosition()
+    {
+        var xOffset = Random.Range(-1f, 1f);
+        var zOffset = Random.Range(-1.5f, 1.5f);
+        return new Vector3(initialPosition.x + xOffset, initialPosition.y, initialPosition.z + zOffset);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -82,25 +83,11 @@ public class AgentDrive : Agent
         var directionToNextCheckpoint = (nextCheckpoint.transform.position - transform.position).normalized;
         sensor.AddObservation(directionToNextCheckpoint);
 
-        // Player radar (raycast)
-        sensor.AddObservation(GetDistanceFrom(-45));
-        sensor.AddObservation(GetDistanceFrom(-22.5f));
-        sensor.AddObservation(GetDistanceFrom(0));
-        sensor.AddObservation(GetDistanceFrom(22.5f));
-        sensor.AddObservation(GetDistanceFrom(45));
-    }
+        // Player radar (raycast):
+        // Automatically added via a Ray Perception Sensor 3D
 
-    private float GetDistanceFrom(float angleFromAgentForward)
-    {
-        RaycastHit hitInfo;
-        var ray = new Ray
-        {
-            origin = rb.transform.position,
-            direction = Quaternion.Euler(0, angleFromAgentForward, 0) * rb.transform.forward.normalized
-        };
-        Physics.Raycast(ray, out hitInfo, MAX_RAY_DISTANCE, 1 << 10);
-        //Debug.Log($"angle: {angleFromAgentForward} \tdist: {hitInfo.distance}\t {hitInfo.collider}");
-        return hitInfo.distance >= 0 ? hitInfo.distance / MAX_RAY_DISTANCE : 1f;
+        // Next checkpoint position (uncomment to watch while playing)
+        //Debug.DrawLine(transform.position, nextCheckpoint.transform.position, Color.yellow, .2f);
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -132,22 +119,17 @@ public class AgentDrive : Agent
     private void SetPlayerRewards()
     {
         // Set reward if moving in the right direction
+        // The direction reward is via the angle between the agent's direction and the direction to the next checkpoint
+        // The reward is then calculated using a logarithmic function
         var directionToNextCheckpoint = (nextCheckpoint.transform.position - transform.position);
-        var velocityAlignment = Vector3.Dot(directionToNextCheckpoint, rb.velocity);
-        SetReward(0.001f * velocityAlignment);
+        var angleToCheckpoint = Vector3.Angle(rb.transform.forward, directionToNextCheckpoint) / 180;
+        var directionReward = -Mathf.Log10(angleToCheckpoint + DIRECTION_ANGLE_LIMIT_PERCENTAGE);
+        SetReward(directionReward);
 
-        // Set reward depending on completed checkpoints
-        SetReward(0.03f * checkpointsCount);
-
-        // Set reward for moving forward
-        SetReward(rb.velocity.normalized.x > 0 ? rb.velocity.normalized.x * .01f : 0);
-
-        // Set reward when finish line is reached
-        if (lastCheckpoint == checkpoints.Last())
-        {
-            SetReward(1f);
-            EndEpisode();
-        }
+        // Set reward for moving forward/penalize moving in reverse
+        // Magnitude depends on velocity (higher velocity higher magnitude)
+        float localForwardVelocity = rb.transform.InverseTransformDirection(rb.velocity).z * 0.001f;
+        SetReward(localForwardVelocity);
     }
 
     private void CheckForInvalidStates()
@@ -166,16 +148,32 @@ public class AgentDrive : Agent
 
     private void CancelPlayerVelocity()
     {
-        //this.rb.angularVelocity = Vector3.zero;
-        //this.rb.velocity = Vector3.zero;
+        this.rb.angularVelocity = Vector3.zero;
+        this.rb.velocity = Vector3.zero;
     }
 
     private bool PlayerIsOffTheTrack()
     {
+        const float offset = 0.3f;
+        var points = new Vector3[]
+        {
+            new Vector3(rb.position.x + offset, rb.position.y, rb.position.z + offset),
+            new Vector3(rb.position.x - offset, rb.position.y, rb.position.z + offset),
+            new Vector3(rb.position.x + offset, rb.position.y, rb.position.z - offset),
+            new Vector3(rb.position.x - offset, rb.position.y, rb.position.z - offset),
+        };
+
         RaycastHit hit;
         const int trackLayerMask = 1 << 8; // layer 8 is for the track
-        Physics.Raycast(rb.position, rb.transform.TransformDirection(-rb.transform.up), out hit, 5f, trackLayerMask);
+        foreach (var point in points)
+        {
+            Physics.Raycast(point, rb.transform.TransformDirection(-rb.transform.up), out hit, 5f, trackLayerMask);
+            if (hit.collider == null)
+            {
+                return true;
+            }
+        }
+        return false;
 
-        return hit.collider == null;
     }
 }

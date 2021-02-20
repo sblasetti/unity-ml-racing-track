@@ -414,6 +414,8 @@ GameObject:
   - component: {fileID: 6566201428725362932}
   - component: {fileID: 3187474542972946096}
   - component: {fileID: 6742416770351594178}
+  - component: {fileID: 6879817364290958823}
+  - component: {fileID: 4108619589323737092}
   m_Layer: 0
   m_Name: NpcVehicle
   m_TagString: Untagged
@@ -521,6 +523,10 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   AllowManualControl: 0
+  directionRewardValue: 0
+  rewardDirectionAlignment: 0
+  rewardCheckpoints: 0
+  rewardForward: 0
 --- !u!114 &3187474542972946096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 11
+    VectorObservationSize: 6
     NumStackedVectorObservations: 1
     VectorActionSize: 03000000
     VectorActionDescriptions: []
@@ -559,6 +565,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 10
   TakeActionsBetweenDecisions: 1
+--- !u!114 &6879817364290958823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145373811054614783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: ShortRayPerceptionSensor
+  m_DetectableTags:
+  - Limit
+  m_RaysPerDirection: 2
+  m_MaxRayDegrees: 120
+  m_SphereCastRadius: 0
+  m_RayLength: 20
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &4108619589323737092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145373811054614783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: LongRayPerceptionSensor
+  m_DetectableTags:
+  - Limit
+  m_RaysPerDirection: 1
+  m_MaxRayDegrees: 5
+  m_SphereCastRadius: 0.5
+  m_RayLength: 50
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
 --- !u!1 &7324585277412276738
 GameObject:
   m_ObjectHideFlags: 0
